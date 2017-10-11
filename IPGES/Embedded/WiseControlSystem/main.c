@@ -159,55 +159,37 @@ ConfigureUART(void)
 int
 main(void)
 {
-    // Set the clocking to run at 50 MHz from the PLL.
     ROM_SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |
-                       SYSCTL_OSC_MAIN);
+                       SYSCTL_OSC_MAIN); // Set the clocking to run at 50 MHz from the PLL.
 
-    // Initialize the UART and configure it for 115,200 badrate, 8-N-1 operation.
-    ConfigureUART();
+    ConfigureUART(); //Initialize the UART and configure it for 115,200 badrate, 8-N-1 operation.
 
-    // Hello Word.
     UARTprintf("\nJulia Conger, Jiahan Liu, Joshua Graham, Kassandra Smith\nBraden Stotmeister, Madeline Jasper\n");
-    UARTprintf("\nSuma, Santoso, Oriana, Alvaro, Boom\n");
+    UARTprintf("\nSuma, Santoso, Oriana, Alvaro, Boom\n"); // Hello World.
 
-    //
-    // Create a mutex to guard the UART.
-    //
-    g_pUARTSemaphore = xSemaphoreCreateMutex();
+    g_pUARTSemaphore = xSemaphoreCreateMutex(); // Create a mutex to guard the UART.
+
 
     //
     // Create the LED task.
     //
-    if(LEDTaskInit() != 0)
-    {
-
-        while(1)
-        {
-        }
+    if(LEDTaskInit() != 0) {
+        while(1) {}
     }
 
     //
     // Create the switch task.
     //
-    if(SwitchTaskInit() != 0)
-    {
-
+    if(SwitchTaskInit() != 0) {
         while(1)
         {
         }
     }
 
-    //
-    // Start the scheduler.  This should not return.
-    //
-    vTaskStartScheduler();
+    vTaskStartScheduler(); // Start the scheduler.  This should not return.
 
-    //
-    // In case the scheduler returns for some reason, print an error and loop
-    // forever.
-    //
-
-    while(1)
-    {
+    while(1) {
+        // In case the scheduler returns for some reason, print an error and loop
+        // forever.
     }
 }
