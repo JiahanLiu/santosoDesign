@@ -12,6 +12,7 @@
 ".\rvmdk\tasks.o"
 ".\rvmdk\uartstdio.o"
 ".\rvmdk\ustdlib.o"
+".\rvmdk\adc_task.o"
 "..\\driverlib\rvmdk\driverlib.lib"
 --library_type=microlib --strict --scatter "freertos_demo.sct"
 

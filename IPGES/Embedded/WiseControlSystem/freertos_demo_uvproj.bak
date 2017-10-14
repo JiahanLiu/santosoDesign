@@ -411,9 +411,9 @@
               <FilePath>..\drivers\buttons.c</FilePath>
             </File>
             <File>
-              <FileName>freertos_demo.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\freertos_demo.c</FilePath>
+              <FilePath>.\main.c</FilePath>
             </File>
             <File>
               <FileName>heap_2.c</FileName>

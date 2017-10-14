@@ -32,8 +32,7 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
-#include "led_task.h"
-#include "switch_task.h"
+#include "adc_task.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -169,21 +168,11 @@ main(void)
 
     g_pUARTSemaphore = xSemaphoreCreateMutex(); // Create a mutex to guard the UART.
 
-
     //
-    // Create the LED task.
+    // Create the task.
     //
-    if(LEDTaskInit() != 0) {
-        while(1) {}
-    }
-
-    //
-    // Create the switch task.
-    //
-    if(SwitchTaskInit() != 0) {
-        while(1)
-        {
-        }
+    if(ADCTaskInit() != 0) {
+        while(1) { }
     }
 
     vTaskStartScheduler(); // Start the scheduler.  This should not return.

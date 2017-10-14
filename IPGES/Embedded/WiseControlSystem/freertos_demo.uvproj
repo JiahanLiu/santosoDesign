@@ -362,7 +362,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>rvmdk PART_TM4C123GH6PM TARGET_IS_TM4C123_RB1</Define>
               <Undefine></Undefine>
-              <IncludePath>.;..;..\;..\third_party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\third_party\FreeRTOS;..\third_party\FreeRTOS\Source\include;..\third_party</IncludePath>
+              <IncludePath>.;..;..\;..\third_party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\third_party\FreeRTOS;..\third_party\FreeRTOS\Source\include;..\third_party;..\driverlib;..\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -469,6 +469,11 @@
               <FileName>ustdlib.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\utils\ustdlib.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\adc_task.c</FilePath>
             </File>
           </Files>
         </Group>

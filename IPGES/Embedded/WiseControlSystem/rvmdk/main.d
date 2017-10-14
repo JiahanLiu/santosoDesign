@@ -10,8 +10,7 @@
 .\rvmdk\main.o: ..\driverlib/uart.h
 .\rvmdk\main.o: ..\utils/uartstdio.h
 .\rvmdk\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdarg.h
-.\rvmdk\main.o: led_task.h
-.\rvmdk\main.o: switch_task.h
+.\rvmdk\main.o: adc_task.h
 .\rvmdk\main.o: ..\third_party\FreeRTOS\Source\include\FreeRTOS.h
 .\rvmdk\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stddef.h
 .\rvmdk\main.o: .\FreeRTOSConfig.h
