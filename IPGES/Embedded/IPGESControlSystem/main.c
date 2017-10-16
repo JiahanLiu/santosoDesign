@@ -181,11 +181,12 @@ int main(void)
 				}
     }
 
+			
     if(PWMTaskInit() != 0) {
         while(1) {
-                    UARTprintf("Error, PWMTaskInit Failed.\n");
-                }
-    }
+					UARTprintf("Error, PWMTaskInit Failed.\n");
+        }
+    } 
 
     vTaskStartScheduler(); // Start the scheduler.  This should not return.
 

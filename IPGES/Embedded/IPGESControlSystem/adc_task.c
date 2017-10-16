@@ -80,6 +80,7 @@ extern xSemaphoreHandle g_pUARTSemaphore;
 // This task toggles the user selected LED at a user selected frequency. User
 // can make the selections by pressing the left and right buttons.
 //
+
 //*****************************************************************************
 void (*ProducerTask)(AdcData_t pDataStruct);  
 void ADC0Seq2_Handler(void);
@@ -165,7 +166,7 @@ uint32_t ADCTaskInit(void(*pTask)(AdcData_t pDataStruct))
     TimerControlTrigger(TIMER2_BASE, TIMER_A, true); //enable timer2A trigger to ADC
     TimerConfigure(TIMER2_BASE, TIMER_CFG_PERIODIC); // Disables the timers, but doesn't enable again
     TimerLoadSet(TIMER2_BASE, TIMER_A, SysCtlClockGet()); //only time A should be set for full width operation, SysCltClockGet returns count for 1 second
-	TimerIntDisable(TIMER2_BASE, 0xFFFFFFFF ); //disable all interrupts for this timer
+		TimerIntDisable(TIMER2_BASE, 0xFFFFFFFF ); //disable all interrupts for this timer
     TimerEnable(TIMER2_BASE, TIMER_A);
     
     

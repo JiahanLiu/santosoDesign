@@ -476,9 +476,9 @@
               <FilePath>.\adc_task.c</FilePath>
             </File>
             <File>
-              <FileName>pwd_task.c</FileName>
+              <FileName>pwm_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\pwd_task.c</FilePath>
+              <FilePath>.\pwm_task.c</FilePath>
             </File>
           </Files>
         </Group>

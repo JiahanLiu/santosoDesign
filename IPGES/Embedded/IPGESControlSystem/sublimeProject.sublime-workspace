@@ -11,26 +11,40 @@
 			"file": "main.c",
 			"settings":
 			{
-				"buffer_size": 6228,
+				"buffer_size": 6364,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "pwm_task.c",
+			"settings":
+			{
+				"buffer_size": 5025,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "pwd_task.c",
+			"file": "pwm_task.h",
 			"settings":
 			{
-				"buffer_size": 0,
-				"encoding": "UTF-8",
+				"buffer_size": 1438,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "adc_task.c",
+			"file": "/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/driverlib/pin_map.h",
 			"settings":
 			{
-				"buffer_size": 7609,
-				"encoding": "UTF-8",
+				"buffer_size": 664792,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/driverlib/pwm.c",
+			"settings":
+			{
+				"buffer_size": 77420,
 				"line_ending": "Windows"
 			}
 		}
@@ -42,10 +56,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 425.0,
-		"last_filter": "Cscope: ",
+		"height": 784.0,
+		"last_filter": "pack",
 		"selected_items":
 		[
+			[
+				"pack",
+				"Package Control: Disable Package"
+			],
 			[
 				"Cscope: ",
 				"Cscope: Rebuild database"
@@ -55,7 +73,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 609.0
+		"width": 784.0
 	},
 	"console":
 	{
@@ -75,10 +93,15 @@
 	},
 	"expanded_folders":
 	[
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded",
 		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem"
 	],
 	"file_history":
 	[
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem/adc_task.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem/main.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem/pwm_task.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem/pwd_task.c",
 		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem/sublimeProject.sublime-project",
 		"/C/ti/TivaWare_C_Series-2.1.4.178/examples/peripherals/pwm/invert.c",
 		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/WiseControlSystem/adc_task.h",
@@ -100,7 +123,7 @@
 	],
 	"find":
 	{
-		"height": 63.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -138,7 +161,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -147,37 +170,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6228,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5849,
-								5860
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 7520.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "pwd_task.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
+						"buffer_size": 6364,
 						"regions":
 						{
 						},
@@ -195,27 +188,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 5911.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "adc_task.c",
+					"buffer": 1,
+					"file": "pwm_task.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7609,
+						"buffer_size": 5025,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5558,
-								5558
+								0,
+								0
 							]
 						],
 						"settings":
@@ -225,10 +218,96 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6768.0,
+						"translation.y": 2444.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "pwm_task.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/driverlib/pin_map.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 664792,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								175623,
+								175623
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 267310.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/driverlib/pwm.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 77420,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25832,
+								25840
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 33532.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -236,7 +315,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 63.0
+		"height": 40.0
 	},
 	"input":
 	{
@@ -273,7 +352,7 @@
 	"project": "sublimeProject.sublime-project",
 	"replace":
 	{
-		"height": 118.0
+		"height": 75.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -89,8 +89,8 @@ static void PWMTask(void *pvParameters)
 
     // Get the current tick count.
     ui32WakeTime = xTaskGetTickCount();
+    char uartInput[20]; 
 
-		
     // Loop forever.
     while(1)
     {  
@@ -109,24 +109,28 @@ static void PWMTask(void *pvParameters)
 uint32_t PWMTaskInit(void)
 {
     // Print the current loggling LED and frequency.
-    UARTprintf("PWM Init\n");
+    //UARTprintf("PWM Init\n");
 	
     // Create a queue for sending messages to the LED task.
     //g_pLEDQueue = xQueueCreate(ADC_QUEUE_SIZE, ADC_ITEM_SIZE);
+    
     SysCtlPWMClockSet(SYSCTL_PWMDIV_1);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
     GPIOPinConfigure(GPIO_PB6_M0PWM0);
     GPIOPinTypePWM(GPIO_PORTB_BASE, GPIO_PIN_6);
     PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_NO_SYNC);
     PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 64000);
-    PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 64000/4);
-    IntMasterEnable();
-    PWMIntEnable(PWM0_BASE, PWM_INT_GEN_0);
-    PWMGenIntTrigEnable(PWM0_BASE, PWM_GEN_0, PWM_INT_CNT_LOAD);
-    IntEnable(INT_PWM0_0);
+	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 64000/4);
     PWMOutputState(PWM0_BASE, PWM_OUT_0_BIT, true);
     PWMGenEnable(PWM0_BASE, PWM_GEN_0);
+
+    /* Used for more intense signals
+    PWMIntEnable(PWM0_BASE, PWM_INT_GEN_0); 
+    IntMasterEnable();
+    PWMGenIntTrigEnable(PWM0_BASE, PWM_GEN_0, PWM_INT_CNT_LOAD);
+    IntEnable(INT_PWM0_0);
+     */
 
     // Create the task.
     if(xTaskCreate(PWMTask, (const portCHAR *)"PWM", PWMTASKSTACKSIZE, NULL,
