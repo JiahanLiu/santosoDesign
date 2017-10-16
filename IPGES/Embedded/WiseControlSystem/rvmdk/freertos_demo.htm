@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\rvmdk\freertos_demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\rvmdk\freertos_demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Mon Oct 16 04:29:25 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Mon Oct 16 12:45:53 2017
 <BR><P>
 <H3>Maximum Stack Usage =        160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -140,11 +140,10 @@ Global Symbols
 
 <P><STRONG><a name="[6b]"></a>__decompress0</STRONG> (Thumb, 58 bytes, Stack size unknown bytes, __dczerorl.o(.text), UNUSED)
 
-<P><STRONG><a name="[8]"></a>ADC0Seq2_Handler</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, adc_task.o(i.ADC0Seq2_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = ADC0Seq2_Handler &rArr; UARTprintf &rArr; UARTvprintf &rArr; UARTwrite
+<P><STRONG><a name="[8]"></a>ADC0Seq2_Handler</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, adc_task.o(i.ADC0Seq2_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC0Seq2_Handler
 </UL>
-<BR>[Calls]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
-<LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceDataGet
+<BR>[Calls]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceDataGet
 <LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntClear
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> adc_task.o(i.ADCTaskInit)
@@ -162,11 +161,11 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
 
-<P><STRONG><a name="[19]"></a>ADCIntRegister</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, adc.o(i.ADCIntRegister))
+<P><STRONG><a name="[18]"></a>ADCIntRegister</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, adc.o(i.ADCIntRegister))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ADCIntRegister &rArr; IntRegister
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
-<LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<BR>[Calls]<UL><LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+<LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
 </UL>
 <BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
@@ -177,7 +176,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
 
-<P><STRONG><a name="[18]"></a>ADCSequenceDataGet</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.ADCSequenceDataGet))
+<P><STRONG><a name="[17]"></a>ADCSequenceDataGet</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.ADCSequenceDataGet))
 <BR><BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC0Seq2_Handler
 </UL>
 
@@ -195,12 +194,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
 
-<P><STRONG><a name="[20]"></a>ADCTaskInit</STRONG> (Thumb, 230 bytes, Stack size 24 bytes, adc_task.o(i.ADCTaskInit))
+<P><STRONG><a name="[20]"></a>ADCTaskInit</STRONG> (Thumb, 266 bytes, Stack size 24 bytes, adc_task.o(i.ADCTaskInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = ADCTaskInit &rArr; xTaskGenericCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockGet
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGenericCreate
-<LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
+<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
 <LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerLoadSet
 <LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntDisable
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerEnable
@@ -209,13 +208,13 @@ Global Symbols
 <LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerConfigure
 <LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntPrioritySet
-<LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
 <LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
 <LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceStepConfigure
 <LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceEnable
 <LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceDisable
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceConfigure
-<LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
 <LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntEnable
 <LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntClear
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCClockConfigSet
@@ -251,19 +250,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
 
-<P><STRONG><a name="[1b]"></a>IntEnable</STRONG> (Thumb, 92 bytes, Stack size 0 bytes, interrupt.o(i.IntEnable))
+<P><STRONG><a name="[1a]"></a>IntEnable</STRONG> (Thumb, 92 bytes, Stack size 0 bytes, interrupt.o(i.IntEnable))
 <BR><BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
-<LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
 </UL>
 
 <P><STRONG><a name="[30]"></a>IntPrioritySet</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, interrupt.o(i.IntPrioritySet))
 <BR><BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
 
-<P><STRONG><a name="[1a]"></a>IntRegister</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, interrupt.o(i.IntRegister))
+<P><STRONG><a name="[19]"></a>IntRegister</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, interrupt.o(i.IntRegister))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IntRegister
 </UL>
-<BR>[Called By]<UL><LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
 </UL>
 
 <P><STRONG><a name="[a]"></a>Producer</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, main.o(i.Producer))
@@ -315,14 +314,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigureUART
 </UL>
 
-<P><STRONG><a name="[17]"></a>UARTprintf</STRONG> (Thumb, 18 bytes, Stack size 24 bytes, uartstdio.o(i.UARTprintf))
+<P><STRONG><a name="[1d]"></a>UARTprintf</STRONG> (Thumb, 18 bytes, Stack size 24 bytes, uartstdio.o(i.UARTprintf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = UARTprintf &rArr; UARTvprintf &rArr; UARTwrite
 </UL>
 <BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTvprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 <LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC0Seq2_Handler
 <LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTask
 </UL>
 
@@ -331,7 +329,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTwrite
 </UL>
-<BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
+<BR>[Called By]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
 </UL>
 
 <P><STRONG><a name="[38]"></a>UARTwrite</STRONG> (Thumb, 56 bytes, Stack size 24 bytes, uartstdio.o(i.UARTwrite))
@@ -351,7 +349,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueCreateMutex
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
-<LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
+<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
 <LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigureUART
 </UL>
@@ -368,7 +366,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[56]"></a>pvTaskIncrementMutexHeldCount</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, tasks.o(i.pvTaskIncrementMutexHeldCount))
-<BR><BR>[Called By]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR><BR>[Called By]<UL><LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[5a]"></a>pxPortInitialiseStack</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, port.o(i.pxPortInitialiseStack))
@@ -426,7 +424,7 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvUnlockQueue
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGenericCreate
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskResumeAll
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckTasksWaitingTermination
 </UL>
@@ -436,7 +434,7 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvUnlockQueue
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGenericCreate
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskResumeAll
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckTasksWaitingTermination
 </UL>
@@ -479,7 +477,7 @@ Global Symbols
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvAddCurrentTaskToDelayedList
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[4f]"></a>vTaskPriorityInherit</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, tasks.o(i.vTaskPriorityInherit))
@@ -488,13 +486,13 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsertEnd
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uxListRemove
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR>[Called By]<UL><LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[57]"></a>vTaskSetTimeOutState</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, tasks.o(i.vTaskSetTimeOutState))
 <BR><BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCheckForTimeOut
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[3a]"></a>vTaskStartScheduler</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, tasks.o(i.vTaskStartScheduler))
@@ -508,7 +506,7 @@ Global Symbols
 
 <P><STRONG><a name="[3e]"></a>vTaskSuspendAll</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, tasks.o(i.vTaskSuspendAll))
 <BR><BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelayUntil
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortFree
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvPortMalloc
@@ -550,7 +548,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[1d]"></a>xQueueGenericReceive</STRONG> (Thumb, 296 bytes, Stack size 64 bytes, queue.o(i.xQueueGenericReceive))
+<P><STRONG><a name="[1c]"></a>xQueueGenericReceive</STRONG> (Thumb, 296 bytes, Stack size 64 bytes, queue.o(i.xQueueGenericReceive))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = xQueueGenericReceive &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskRemoveFromEventList
@@ -595,7 +593,7 @@ Global Symbols
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[31]"></a>xTaskGenericCreate</STRONG> (Thumb, 376 bytes, Stack size 56 bytes, tasks.o(i.xTaskGenericCreate))
@@ -615,7 +613,7 @@ Global Symbols
 <LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTaskInit
 </UL>
 
-<P><STRONG><a name="[1c]"></a>xTaskGetTickCount</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, tasks.o(i.xTaskGetTickCount))
+<P><STRONG><a name="[1b]"></a>xTaskGetTickCount</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, tasks.o(i.xTaskGetTickCount))
 <BR><BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCTask
 </UL>
 
@@ -647,7 +645,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvUnlockQueue
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[3f]"></a>xTaskResumeAll</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, tasks.o(i.xTaskResumeAll))
@@ -660,7 +658,7 @@ Global Symbols
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uxListRemove
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelayUntil
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortFree
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvPortMalloc
@@ -678,7 +676,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR>[Called By]<UL><LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[46]"></a>prvCopyDataToQueue</STRONG> (Thumb, 110 bytes, Stack size 16 bytes, queue.o(i.prvCopyDataToQueue))
@@ -699,7 +697,7 @@ Local Symbols
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[1]"></a>NmiSR</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
@@ -760,14 +758,14 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskIncrementTick
 </UL>
 
-<P><STRONG><a name="[9]"></a>ADCTask</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, adc_task.o(i.ADCTask))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = ADCTask &rArr; xQueueGenericSend &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
+<P><STRONG><a name="[9]"></a>ADCTask</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, adc_task.o(i.ADCTask))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = ADCTask &rArr; xQueueGenericSend &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGetTickCount
+<BR>[Calls]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGetTickCount
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelayUntil
-<LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
+<LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTprintf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> adc_task.o(i.ADCTaskInit)
 </UL><P>

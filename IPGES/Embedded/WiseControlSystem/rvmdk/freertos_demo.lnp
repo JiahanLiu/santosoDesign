@@ -13,7 +13,7 @@
 ".\rvmdk\uartstdio.o"
 ".\rvmdk\ustdlib.o"
 ".\rvmdk\adc_task.o"
-"..\\driverlib\rvmdk\driverlib.lib"
+"..\driverlib\rvmdk\driverlib.lib"
 --library_type=microlib --strict --scatter "freertos_demo.sct"
 
 --entry Reset_Handler --summary_stderr --info summarysizes --map --xref --callgraph --symbols
