@@ -119,8 +119,8 @@ vApplicationStackOverflowHook(xTaskHandle *pxTask, char *pcTaskName)
 // Configure the UART and its pins.  This must be called before UARTprintf().
 //
 //*****************************************************************************
-void
-ConfigureUART(void)
+void ConfigureUART(void)
+	
 {
     //
     // Enable the GPIO Peripheral used by the UART.
@@ -150,29 +150,34 @@ ConfigureUART(void)
     UARTStdioConfig(0, 115200, 16000000);
 }
 
+void Producer(AdcData_t pDataStruct) {
+
+}
+
 //*****************************************************************************
 //
 // Initialize FreeRTOS and start the initial set of tasks.
 //
 //*****************************************************************************
-int
-main(void)
+int main(void)
 {
     ROM_SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |
                        SYSCTL_OSC_MAIN); // Set the clocking to run at 50 MHz from the PLL.
 
     ConfigureUART(); //Initialize the UART and configure it for 115,200 badrate, 8-N-1 operation.
 
-    UARTprintf("\nJulia Conger, Jiahan Liu, Joshua Graham, Kassandra Smith\nBraden Stotmeister, Madeline Jasper\n");
-    UARTprintf("\nSuma, Santoso, Oriana, Alvaro, Boom\n"); // Hello World.
+    UARTprintf("Jiahan Liu, Jiahan Liu, Joshua Graham, Kassandra Smith\nBraden Stotmeister, Madeline Jasper\n");
+    UARTprintf("Suma, Santoso, Oriana, Alvaro, Boom\n"); // Hello World.
 
     g_pUARTSemaphore = xSemaphoreCreateMutex(); // Create a mutex to guard the UART.
 
     //
     // Create the task.
     //
-    if(ADCTaskInit() != 0) {
-        while(1) { }
+    if(ADCTaskInit(&Producer) != 0) {
+        while(1) {
+					UARTprintf("Error, ADCTaskInit Failed.\n");
+				}
     }
 
     vTaskStartScheduler(); // Start the scheduler.  This should not return.
@@ -180,5 +185,6 @@ main(void)
     while(1) {
         // In case the scheduler returns for some reason, print an error and loop
         // forever.
+			UARTprintf("Error, Scheduler returned: ran out of tasks.\n");
     }
 }

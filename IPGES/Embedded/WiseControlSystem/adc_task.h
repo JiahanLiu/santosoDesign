@@ -25,11 +25,19 @@
 #ifndef __ADC_TASK_H__
 #define __ADC_TASK_H__
 
+struct AdcData{
+	unsigned long reading0;
+	unsigned long reading1;
+	unsigned long reading2;
+	unsigned long reading3;
+};
+typedef struct AdcData AdcData_t;
+
 //*****************************************************************************
 //
 // Prototypes for the LED task.
 //
 //*****************************************************************************
-extern uint32_t ADCTaskInit(void);
+extern uint32_t ADCTaskInit(void(*pTask)(AdcData_t pDataStruct));
 
 #endif // __LED_TASK_H__

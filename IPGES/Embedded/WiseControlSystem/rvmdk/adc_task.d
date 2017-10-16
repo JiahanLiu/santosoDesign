@@ -23,3 +23,6 @@
 .\rvmdk\adc_task.o: ..\driverlib\adc.h
 .\rvmdk\adc_task.o: ..\driverlib\sysctl.h
 .\rvmdk\adc_task.o: ..\driverlib\gpio.h
+.\rvmdk\adc_task.o: ..\driverlib\timer.h
+.\rvmdk\adc_task.o: ..\driverlib\interrupt.h
+.\rvmdk\adc_task.o: ..\inc\hw_ints.h

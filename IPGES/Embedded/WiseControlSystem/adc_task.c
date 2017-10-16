@@ -39,6 +39,9 @@
 #include "hw_memmap.h" //for address bases
 #include "sysctl.h" //for init ports
 #include "gpio.h" //for gpio to be interfaced to adc
+#include "timer.h" //for timer
+#include "interrupt.h" //for interrupt
+#include "hw_ints.h" //for INT_TIMER2A
 
 //*****************************************************************************
 //
@@ -52,7 +55,8 @@
 // ADC Init Macros
 //
 //*****************************************************************************
-#define ADC_SEQUENCE3           3
+#define ADC_SEQUENCE2           2
+#define ADC_SEQUENCE2_PRIORITY  2
 
 //*****************************************************************************
 //
@@ -78,8 +82,14 @@ extern xSemaphoreHandle g_pUARTSemaphore;
 // can make the selections by pressing the left and right buttons.
 //
 //*****************************************************************************
-static void
-ADCTask(void *pvParameters)
+void (*ProducerTask)(AdcData_t pDataStruct);  
+void ADC0Seq2_Handler(void);
+void Timer2IntHandler(void);
+void Timer0IntHandler(void);
+
+uint32_t adcInput;
+
+static void ADCTask(void *pvParameters)
 {
     portTickType ui32WakeTime;
 
@@ -87,22 +97,23 @@ ADCTask(void *pvParameters)
     ui32WakeTime = xTaskGetTickCount();
 
 		
-		int i = 0;
+	int i = 0;
     // Loop forever.
     while(1)
     {  
+        
+        /*
         uint32_t adcInput;
-        ADCProcessorTrigger(ADC0_BASE, ADC_SEQUENCE3);
-        while(!ADCIntStatus(ADC0_BASE, ADC_SEQUENCE3, false))
+
+        ADCProcessorTrigger(ADC0_BASE, ADC_SEQUENCE2);
+
+        while(!ADCIntStatus(ADC0_BASE, ADC_SEQUENCE2, false))
         {
         }
-        ADCIntClear(ADC0_BASE, ADC_SEQUENCE3);
-        ADCSequenceDataGet(ADC0_BASE, 3, &adcInput);
-        /*
-        ADCSequenceDataGet(ADC0_BASE, ADC_SEQUENCE0, &adcInput);
-        // Guard UART from concurrent access. Print the currently
-        // blinking frequency.
-        */
+
+        ADCIntClear(ADC0_BASE, ADC_SEQUENCE2);
+        ADCSequenceDataGet(ADC0_BASE, ADC_SEQUENCE2, &adcInput);
+    */
         xSemaphoreTake(g_pUARTSemaphore, portMAX_DELAY);
         UARTprintf("ADC reading%d: %d\n", i, adcInput);
         xSemaphoreGive(g_pUARTSemaphore);
@@ -123,35 +134,85 @@ ADCTask(void *pvParameters)
 // Initializes the LED task.
 //
 //*****************************************************************************
-uint32_t
-ADCTaskInit(void)
+uint32_t ADCTaskInit(void(*pTask)(AdcData_t pDataStruct))
 {
     // Print the current loggling LED and frequency.
-    UARTprintf("\nADC Init\n");
+    UARTprintf("ADC Init\n");
 
+	ProducerTask = pTask;
+	
     // Create a queue for sending messages to the LED task.
     //g_pLEDQueue = xQueueCreate(ADC_QUEUE_SIZE, ADC_ITEM_SIZE);
 
-
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0); //activate ADC0
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD); //active GPIO Port D
-    GPIOPinTypeADC(GPIO_PORTD_BASE, GPIO_PIN_3); //choose port D pin 3
-
-    ADCSequenceDisable(ADC0_BASE, ADC_SEQUENCE3);
-
-    ADCSequenceConfigure(ADC0_BASE, ADC_SEQUENCE3, ADC_TRIGGER_PROCESSOR, 0); //adc_base, Sequence Number, Trigger Object, Priority
-
-    ADCSequenceStepConfigure(ADC0_BASE, ADC_SEQUENCE3, 0, ADC_CTL_CH4 | ADC_CTL_END | ADC_CTL_IE); //adc_base, Sequence Number, Step, set flag and end after first
-
-    ADCSequenceEnable(ADC0_BASE, ADC_SEQUENCE3); //adc_base, sequence 
-    ADCIntClear(ADC0_BASE, ADC_SEQUENCE3);
+    /* //working timer
+                    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
+    IntMasterEnable();
+                TimerConfigure(TIMER2_BASE, TIMER_CFG_PERIODIC);
+    TimerLoadSet(TIMER2_BASE, TIMER_A, SysCtlClockGet());
+         IntEnable(INT_TIMER2A);
+    TimerIntEnable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+    IntRegister(INT_TIMER2A, &Timer2IntHandler);
+     TimerEnable(TIMER2_BASE, TIMER_A);
+     */
+           
+       
+    //IntMasterEnable(); //needed? Should be non critical
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE); 
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0); 
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
+    GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_3); //must have enabled ADC first
+    TimerDisable(TIMER2_BASE, TIMER_A);
+    TimerControlTrigger(TIMER2_BASE, TIMER_A, true); //enable timer2A trigger to ADC
+    TimerConfigure(TIMER2_BASE, TIMER_CFG_PERIODIC); // Disables the timers, but doesn't enable again
+    TimerLoadSet(TIMER2_BASE, TIMER_A, SysCtlClockGet()); //only time A should be set for full width operation, SysCltClockGet returns count for 1 second
+	TimerIntDisable(TIMER2_BASE, 0xFFFFFFFF ); //disable all interrupts for this timer
+    TimerEnable(TIMER2_BASE, TIMER_A);
+    
+    
+		
+    ADCClockConfigSet(ADC0_BASE, ADC_CLOCK_RATE_EIGHTH , 1); //last param is divider
+    ADCSequenceDisable(ADC0_BASE, ADC_SEQUENCE2); 
+    ADCSequenceConfigure(ADC0_BASE, ADC_SEQUENCE2, ADC_TRIGGER_TIMER, 0);
+    ADCSequenceStepConfigure(ADC0_BASE, ADC_SEQUENCE2, 0, ADC_CTL_CH0 | ADC_CTL_END | ADC_CTL_IE); //adc_base, Sequence Number, Step, set flag and end after first
+    ADCSequenceEnable(ADC0_BASE, ADC_SEQUENCE2); //adc_base, sequence 
+    ADCIntEnable(ADC0_BASE, ADC_SEQUENCE2);
+    ADCIntRegister(ADC0_BASE, ADC_SEQUENCE2, &ADC0Seq2_Handler);
+    IntPrioritySet(INT_ADC0SS2, ADC_SEQUENCE2_PRIORITY);
+    IntEnable(INT_ADC0SS2);
+    ADCIntClear(ADC0_BASE, ADC_SEQUENCE2);
+		
     // Create the task.
-    if(xTaskCreate(ADCTask, (const portCHAR *)"LED", ADCTASKSTACKSIZE, NULL,
+    if(xTaskCreate(ADCTask, (const portCHAR *)"ADC", ADCTASKSTACKSIZE, NULL,
                    tskIDLE_PRIORITY + PRIORITY_LED_TASK, NULL) != pdTRUE) 
     {
         return(1);
     }
-
     // Success.
     return(0);
+}
+
+void ADC0Seq2_Handler(void)
+{
+
+    ADCIntClear(ADC0_BASE, ADC_SEQUENCE2);
+    //
+    // Clear the timer interrupt flag.
+    //
+    ADCSequenceDataGet(ADC0_BASE, ADC_SEQUENCE2, &adcInput);
+}
+
+void Timer2IntHandler(void)
+{	
+    TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+    IntMasterDisable();
+	UARTprintf("Timer2 Handler\n");
+    IntMasterEnable();
+}
+void
+Timer0IntHandler(void)
+{
+        TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+        IntMasterDisable();
+        UARTprintf("Timer0 Handler\n");
+        IntMasterEnable();
 }

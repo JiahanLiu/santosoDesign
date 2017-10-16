@@ -8,10 +8,9 @@ Project File Date:  10/11/2017
 
 <h2>Output:</h2>
 Build target 'freertos_demo'
-compiling main.c...
 compiling adc_task.c...
 linking...
-Program Size: Code=6220 RO-data=176 RW-data=96 ZI-data=30936  
+Program Size: Code=7368 RO-data=1036 RW-data=1644 ZI-data=30932  
 After Build - User command #1: fromelf --bin --output .\rvmdk\freertos_demo.bin .\rvmdk\freertos_demo.axf
 ".\rvmdk\freertos_demo.axf" - 0 Error(s), 0 Warning(s).
 Load "C:\\Users\\jiaha\\Documents\\santosoDesign\\IPGES\\Embedded\\WiseControlSystem\\rvmdk\\freertos_demo.axf" 
@@ -19,3 +18,49 @@ Connecting: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
+compiling main.c...
+"main.c" - 0 Error(s), 0 Warning(s).
+00000Hz
+Erase Done.
+Programming Done.
+Verify OK.
+s\santosoDesign\IPGES\Embedded\WiseControlSystem\rvmdk\freertos_demo.axf'
+defined
+      TimerConfigure(TIMER2_BASE, TIMER_CFG_RTC | TIMER_CFG_PERIODIC);
+adc_task.c(138): warning:  #223-D: function "TimerLoadSet" declared implicitly
+      TimerLoadSet(TIMER2_BASE, TIMER_A, SysCtlClockGet() / 1000); //only time A should be set for full width operation, SysCltClockGet returns count for 1 second
+adc_task.c(139): warning:  #223-D: function "IntMasterEnable" declared implicitly
+      IntMasterEnable();
+adc_task.c(140): warning:  #223-D: function "TimerIntEnable" declared implicitly
+      TimerIntEnable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+adc_task.c(140): error:  #20: identifier "TIMER_TIMA_TIMEOUT" is undefined
+      TimerIntEnable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+adc_task.c(141): warning:  #223-D: function "IntEnable" declared implicitly
+      IntEnable(INT_TIMER2A);
+adc_task.c(141): error:  #20: identifier "INT_TIMER2A" is undefined
+      IntEnable(INT_TIMER2A);
+adc_task.c(142): warning:  #223-D: function "TimerEnable" declared implicitly
+      TimerEnable(TIMER2_BASE, TIMER_A);
+adc_task.c(172): warning:  #1-D: last line of file ends without a newline
+  }
+adc_task.c: 8 warnings, 5 errors
+".\rvmdk\freertos_demo.axf" - 5 Error(s), 8 Warning(s).
+Target not created
+c(142): warning:  #223-D: function "TimerEnable" declared implicitly
+      TimerEnable(TIMER2_BASE, TIMER_A);
+adc_task.c(153): error:  #20: identifier "ADCTask" is undefined
+      if(xTaskCreate(ADCTask, (const portCHAR *)"LED", ADCTASKSTACKSIZE, NULL,
+adc_task.c(163): error:  #247: function "ADC0Seq2_Handler" has already been defined
+  void ADC0Seq2_Handler(void)
+adc_task.c(169): error:  #20: identifier "adcInput" is undefined
+      ADCSequenceDataGet(ADC0_BASE, ADC_SEQUENCE2, &adcInput);
+adc_task.c(172): warning:  #1-D: last line of file ends without a newline
+  }
+adc_task.c: 9 warnings, 10 errors
+".\rvmdk\freertos_demo.axf" - 10 Error(s), 9 Warning(s).
+Target not created
+line
+  }
+adc_task.c: 9 warnings, 10 errors
+".\rvmdk\freertos_demo.axf" - 11 Error(s), 9 Warning(s).
+Target not created
