@@ -1,0 +1,22 @@
+--cpu Cortex-M4.fp
+".\rvmdk\buttons.o"
+".\rvmdk\main.o"
+".\rvmdk\heap_2.o"
+".\rvmdk\led_task.o"
+".\rvmdk\list.o"
+".\rvmdk\port.o"
+".\rvmdk\queue.o"
+".\rvmdk\rgb.o"
+".\rvmdk\startup_rvmdk.o"
+".\rvmdk\switch_task.o"
+".\rvmdk\tasks.o"
+".\rvmdk\uartstdio.o"
+".\rvmdk\ustdlib.o"
+".\rvmdk\adc_task.o"
+".\rvmdk\pwm_task.o"
+"..\driverlib\rvmdk\driverlib.lib"
+--library_type=microlib --strict --scatter "freertos_demo.sct"
+
+--entry Reset_Handler --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\rvmdk\freertos_demo.map" -o .\rvmdk\freertos_demo.axf

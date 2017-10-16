@@ -1,0 +1,323 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main.c",
+			"settings":
+			{
+				"buffer_size": 6228,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "pwd_task.c",
+			"settings":
+			{
+				"buffer_size": 0,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "adc_task.c",
+			"settings":
+			{
+				"buffer_size": 7609,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 425.0,
+		"last_filter": "Cscope: ",
+		"selected_items":
+		[
+			[
+				"Cscope: ",
+				"Cscope: Rebuild database"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 609.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem"
+	],
+	"file_history":
+	[
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/IPGESControlSystem/sublimeProject.sublime-project",
+		"/C/ti/TivaWare_C_Series-2.1.4.178/examples/peripherals/pwm/invert.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/WiseControlSystem/adc_task.h",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/WiseControlSystem/adc_task.c",
+		"/C/ti/TivaWare_C_Series-2.1.4.178/examples/peripherals/adc/single_ended.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/driverlib/adc.c",
+		"/C/ti/TivaWare_C_Series-2.1.4.178/examples/peripherals/timer/periodic_16bit.c",
+		"/C/ti/TivaWare_C_Series-2.1.4.178/examples/peripherals/adc/differential.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/inc/hw_adc.h",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/cscope.out",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/Embedded/third_party/FreeRTOS/Source/include/semphr.h",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/third_party/FreeRTOS/Source/include/semphr.h",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/WiseControlSystem/main.c",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/inc/hw_adc.h",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/WiseControlSystem/FreeRTOSConfig.h",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/WiseControlSystem/Makefile",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/WiseControlSystem/freertos_demo.uvproj",
+		"/C/Users/jiaha/Documents/santosoDesign/IPGES/makedefs"
+	],
+	"find":
+	{
+		"height": 63.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"SYSCTL_PERIPH_TIMER2",
+			"Timer0BIntHandler",
+			"INT_TIMER0B",
+			"Timer0BIntHandler",
+			"BASE",
+			"ADC0_BASE",
+			"ADCSequenceConfigure"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6228,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5849,
+								5860
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7520.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "pwd_task.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "adc_task.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5558,
+								5558
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6768.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 63.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "sublimeProject.sublime-project",
+	"replace":
+	{
+		"height": 118.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"adc",
+				"driverlib\\adc.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 476.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
