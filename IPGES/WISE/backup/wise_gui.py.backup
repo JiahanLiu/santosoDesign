@@ -1,0 +1,84 @@
+import sys
+
+import WiseGrid as wg
+
+import matplotlib
+matplotlib.use('TkAgg')
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+from matplotlib.figure import Figure
+from Tkinter import *
+from PIL import Image, ImageTk
+import xml.parsers.expat
+import RPi.GPIO as GPIO
+
+
+##############################
+# Initialization
+##############################
+
+GPIO.setmode(GPIO.BOARD)
+
+root = Tk()
+root.title("Grid Control System")
+
+# Maximize Window
+toplevel = root.winfo_toplevel()
+w = root.winfo_screenwidth()
+h = root.winfo_screenheight() - 60
+geom_string = "%dx%d+0+0" % (w,h)
+toplevel.wm_geometry(geom_string)
+
+# Create Grid Canvas
+canvas = Canvas(root, bg='white', height=504, width=954)
+image = Image.open("grid.bmp")
+grid = ImageTk.PhotoImage(image)
+canvas.create_image(0, 0, image=grid, anchor=N+W)
+canvas.grid(row=0, column=0, rowspan=2, sticky=N+W+S+E)
+
+colordict = dict()
+
+# create color dictionary for switch and checkbutton placement
+px = image.load()
+for w in range(image.size[0]):
+    for h in range(image.size[1]):
+        if px[w,h][0] == 255 and px[w,h][1] == 0:
+            colorid = str(px[w,h][0])+str(px[w,h][1])+str(px[w,h][2])
+            colordict[colorid] = [w,h]
+
+
+#Create Zones
+zones = dict()
+current_zone = ""
+def start_element(name, attrs):
+    global current_zone
+    if name == 'zone':
+        current_zone = attrs['id']
+        if attrs['colorid'] in colordict:
+            zones[current_zone] = Zone(canvas, attrs['id'], colordict[attrs['colorid']][0],
+                                       colordict[attrs['colorid']][1], int(attrs['pin']),
+                                       attrs['lbl_loc'], attrs['checked'])
+            GPIO.setup(zones[current_zone].pin, GPIO.OUT)
+    if name == 'switch':
+        if current_zone in zones and attrs['colorid'] in colordict:
+            zones[current_zone].addSwitch(colordict[attrs['colorid']][0],colordict[attrs['colorid']][1])
+
+p = xml.parsers.expat.ParserCreate()
+p.StartElementHandler = start_element
+f = open('./wise_gui.cfg', 'r')
+p.Parse(f.read())
+for zone in zones:
+    zones[zone].cb()
+
+# Create Plots
+
+
+# Create RMS Table
+
+
+
+
+
+###############################
+# Main Loop
+###############################
+root.mainloop()
