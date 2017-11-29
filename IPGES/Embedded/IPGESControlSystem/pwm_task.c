@@ -89,7 +89,7 @@ static void PWMTask(void *pvParameters)
 
     // Get the current tick count.
     ui32WakeTime = xTaskGetTickCount();
-    char uartInput[20]; 
+    //char uartInput[20]; 
 
     // Loop forever.
     while(1)
@@ -113,18 +113,36 @@ uint32_t PWMTaskInit(void)
 	
     // Create a queue for sending messages to the LED task.
     //g_pLEDQueue = xQueueCreate(ADC_QUEUE_SIZE, ADC_ITEM_SIZE);
-    
-    SysCtlPWMClockSet(SYSCTL_PWMDIV_1);
+
+	
+    SysCtlPWMClockSet(SYSCTL_PWMDIV_1); //set PWM clock to processor clock with multiplier of 1
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
     GPIOPinConfigure(GPIO_PB6_M0PWM0);
     GPIOPinTypePWM(GPIO_PORTB_BASE, GPIO_PIN_6);
-    PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_NO_SYNC);
-    PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 64000);
-	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 64000/4);
+    PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_DB_NO_SYNC);
+    PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 2000);
+	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 2000* 50/100);
     PWMOutputState(PWM0_BASE, PWM_OUT_0_BIT, true);
+    PWMOutputInvert(PWM0_BASE, PWM_OUT_0_BIT, false);
     PWMGenEnable(PWM0_BASE, PWM_GEN_0);
-
+ 
+	
+	SysCtlPWMClockSet(SYSCTL_PWMDIV_1); //set PWM clock to processor clock with multiplier of 1
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+    GPIOPinConfigure(GPIO_PB7_M0PWM1);
+    GPIOPinTypePWM(GPIO_PORTB_BASE, GPIO_PIN_7);
+    PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_DB_NO_SYNC);
+    PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 2000);
+    PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2000* 50/100);
+    PWMOutputState(PWM0_BASE, PWM_OUT_1_BIT, true);
+    //PWMOutputInvert(PWM0_BASE, PWM_OUT_1_BIT, true);
+    PWMDeadBandEnable(PWM0_BASE, PWM_GEN_0, 0xF, 0xF);
+    PWMGenEnable(PWM0_BASE, PWM_GEN_0);
+		
+	
+	
     /* Used for more intense signals
     PWMIntEnable(PWM0_BASE, PWM_INT_GEN_0); 
     IntMasterEnable();
@@ -142,6 +160,7 @@ uint32_t PWMTaskInit(void)
     return(0);
 }
 
+/*
 void PWM0IntHandler(void)
 {
 
@@ -152,3 +171,4 @@ void PWM0IntHandler(void)
     //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 64000/2);
 
 }
+*/

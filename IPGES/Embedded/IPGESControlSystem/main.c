@@ -163,7 +163,7 @@ void Producer(AdcData_t pDataStruct) {
 int main(void)
 {
     ROM_SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |
-                       SYSCTL_OSC_MAIN); // Set the clocking to run at 50 MHz from the PLL.
+                       SYSCTL_OSC_MAIN); // Set the clocking to run at 50 MHz from the PLL. I think this is actually 80 MHz
 
     ConfigureUART(); //Initialize the UART and configure it for 115,200 badrate, 8-N-1 operation.
 
