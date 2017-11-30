@@ -28,56 +28,45 @@
 #include "inc/hw_types.h"
 #include "driverlib/rom.h"
 #include "utils/uartstdio.h"
-#include "pwm_task.h"
+#include "interpreter.h"
 #include "priorities.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
 #include "semphr.h"
-
-#include "pwm.h" //for pwm lib
-#include "hw_memmap.h" //for address bases
-#include "sysctl.h" //for init ports
-#include "gpio.h" //for gpio to be interfaced to adc
-#include "interrupt.h" //for interrupt
-#include "hw_ints.h" //for INT_TIMER2A
-#include "pin_map.h" //for GPIO_PB6_M0PWM0
+#include "adc_task.h"
+#include "pwm_task.h"
 
 
-#define GPIO_PORTB_DR8R_R       (*((volatile uint32_t *)0x40005508))
 //*****************************************************************************
 //
 // The stack size for the task.
 //
 //*****************************************************************************
-#define PWMTASKSTACKSIZE        128         // Stack size in words
+#define INTERPRETERTASKSTACKSIZE        128         // Stack size in words
 
 //*****************************************************************************
 //
 // ADC Init Macros
 //
 //*****************************************************************************
-#define ADC_SEQUENCE2           2
-#define ADC_SEQUENCE2_PRIORITY  2
+#define INPUTLENGTH           20 //includes null
 
 //*****************************************************************************
 //
 // The item size and queue size for the message queue.
 //
 //*****************************************************************************
-#define PWM_ITEM_SIZE           sizeof(uint8_t)
-#define PWM_QUEUE_SIZE          5
+#define INTERPRETER_ITEM_SIZE           sizeof(uint8_t)
+#define INTERPRETER_QUEUE_SIZE          5
 
 //*****************************************************************************
 //
 // The queue that holds messages sent to the LED task.
 //
 //*****************************************************************************
-xQueueHandle g_pPwmQueue;
+xQueueHandle g_pInterpreterQueue;
 
-
-
-extern xSemaphoreHandle g_pUARTSemaphore;
 //*****************************************************************************
 //
 // This task toggles the user selected LED at a user selected frequency. User
@@ -85,23 +74,32 @@ extern xSemaphoreHandle g_pUARTSemaphore;
 //
 //*****************************************************************************
 
-static void PWMTask(void *pvParameters)
+static void InterpreterTask(void *pvParameters)
 {
-		UARTprintf("PWM Init\n");
-    portTickType ui32WakeTime;
-
-    // Get the current tick count.
-    ui32WakeTime = xTaskGetTickCount();
-    //char uartInput[20]; 
-
-    // Loop forever.
+		UARTprintf("Interpreter Init\n");
+    char uartInput[INPUTLENGTH];
+		int dutyCycle;
+	
     while(1)
     {  
-        //
-        // Wait for the required amount of time.
-        //
-        vTaskDelayUntil(&ui32WakeTime, 1000 / portTICK_RATE_MS);
-    } //forever loop
+			UARTprintf("$");
+			UARTgets(uartInput, INPUTLENGTH); //note this is blocking, use peek to do non-blocking
+			switch(uartInput[0]) {
+				case 'A':
+					ADC_Print();
+					break;
+				case 'P': //PWM 50
+					dutyCycle = (uartInput[4] - 48) * 10 + uartInput[5] - 48;
+					if(0 <= dutyCycle && dutyCycle <= 99) {
+						PWM_dutyCycleChange(dutyCycle);
+					} else {
+						UARTprintf("Duty cycle between 0-99 inclusive.\n");
+					}
+					break;
+				default :
+					UARTprintf("Command not found\n");
+			}
+    }
 }
 
 //*****************************************************************************
@@ -109,42 +107,14 @@ static void PWMTask(void *pvParameters)
 // Initializes the LED task.
 //
 //*****************************************************************************
-uint32_t PWMTaskInit(void)
+uint32_t InterpreterTaskInit(void)
 {
+    // Print the current loggling LED and frequency.
+    //UARTprintf("PWM Init\n");
 	
     // Create a queue for sending messages to the LED task.
     //g_pLEDQueue = xQueueCreate(ADC_QUEUE_SIZE, ADC_ITEM_SIZE);
-
-	
-    SysCtlPWMClockSet(SYSCTL_PWMDIV_1); //set PWM clock to processor clock with multiplier of 1
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
-    GPIOPinConfigure(GPIO_PB6_M0PWM0);
-    GPIOPinTypePWM(GPIO_PORTB_BASE, GPIO_PIN_6);
-    PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_DB_NO_SYNC);
-    PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 2500);
-		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 2500* 50/100);
-    PWMOutputState(PWM0_BASE, PWM_OUT_0_BIT, true);
-    PWMOutputInvert(PWM0_BASE, PWM_OUT_0_BIT, false);
-    //GPIO_PORTB_DR8R_R |=0xC0;
-    PWMGenEnable(PWM0_BASE, PWM_GEN_0);
- 
-	
-	SysCtlPWMClockSet(SYSCTL_PWMDIV_1); //set PWM clock to processor clock with multiplier of 1
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
-    GPIOPinConfigure(GPIO_PB7_M0PWM1);
-    GPIOPinTypePWM(GPIO_PORTB_BASE, GPIO_PIN_7);
-    PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_DB_NO_SYNC);
-    PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 2500);
-    PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2500* 50/100);
-    PWMOutputState(PWM0_BASE, PWM_OUT_1_BIT, true);
-    //PWMOutputInvert(PWM0_BASE, PWM_OUT_1_BIT, true);
-    PWMDeadBandEnable(PWM0_BASE, PWM_GEN_0, 0xF, 0xF);
-    //GPIO_PORTB_DR8R_R |=0xC0;
-    PWMGenEnable(PWM0_BASE, PWM_GEN_0);
 		
-	
 	
     /* Used for more intense signals
     PWMIntEnable(PWM0_BASE, PWM_INT_GEN_0); 
@@ -154,29 +124,11 @@ uint32_t PWMTaskInit(void)
      */
 
     // Create the task.
-    if(xTaskCreate(PWMTask, (const portCHAR *)"PWM", PWMTASKSTACKSIZE, NULL,
-                   tskIDLE_PRIORITY + PRIORITY_PWM_TASK, NULL) != pdTRUE) 
+    if(xTaskCreate(InterpreterTask, (const portCHAR *)"Interpreter", INTERPRETERTASKSTACKSIZE, NULL,
+                   tskIDLE_PRIORITY + PRIORITY_INTERPRETER_TASK, NULL) != pdTRUE) 
     {
         return(1);
     }
-    // Success.
+    
     return(0);
 }
-
-void PWM_dutyCycleChange(int dutyCycle) {
-	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 2500* dutyCycle/100);
-	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2500* dutyCycle/100);
-}
-
-/*
-void PWM0IntHandler(void)
-{
-
-    PWMGenIntClear(PWM0_BASE, PWM_GEN_0, PWM_INT_CNT_LOAD);
-    //
-    // Clear the timer interrupt flag.
-    //
-    //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_0, 64000/2);
-
-}
-*/

@@ -480,6 +480,11 @@
               <FileType>1</FileType>
               <FilePath>.\pwm_task.c</FilePath>
             </File>
+            <File>
+              <FileName>interpreter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\interpreter.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

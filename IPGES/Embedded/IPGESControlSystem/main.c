@@ -38,6 +38,7 @@
 #include "semphr.h"
 #include "adc_task.h"
 #include "pwm_task.h"
+#include "interpreter.h"
 
 //*****************************************************************************
 //
@@ -188,6 +189,13 @@ int main(void)
         }
     } 
 
+		
+		if(InterpreterTaskInit() != 0) {
+        while(1) {
+					UARTprintf("Error, PWMTaskInit Failed.\n");
+        }
+    } 
+		
     vTaskStartScheduler(); // Start the scheduler.  This should not return.
 
     while(1) {

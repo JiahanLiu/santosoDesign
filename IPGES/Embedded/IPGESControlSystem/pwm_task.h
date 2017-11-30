@@ -30,6 +30,7 @@
 // Prototypes for the LED task.
 //
 //*****************************************************************************
-extern uint32_t PWMTaskInit(void);
+uint32_t PWMTaskInit(void);
+void PWM_dutyCycleChange(int dutyCycle);
 
 #endif // __LED_TASK_H__

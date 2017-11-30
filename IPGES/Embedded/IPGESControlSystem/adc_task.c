@@ -95,9 +95,7 @@ static void ADCTask(void *pvParameters)
 
     // Get the current tick count.
     ui32WakeTime = xTaskGetTickCount();
-
 		
-	int i = 0;
     // Loop forever.
     while(1)
     {  
@@ -114,21 +112,19 @@ static void ADCTask(void *pvParameters)
         ADCIntClear(ADC0_BASE, ADC_SEQUENCE2);
         ADCSequenceDataGet(ADC0_BASE, ADC_SEQUENCE2, &adcInput);
     */
-        xSemaphoreTake(g_pUARTSemaphore, portMAX_DELAY);
-        UARTprintf("\r                                                                       ");
-        UARTprintf("\rPE3: %d   |   PE2: %d   |    PE1: %d    |   PE0: %d", adcRawInput.PE3, adcRawInput.PE2, adcRawInput.PE1, adcRawInput.PE0);
-        xSemaphoreGive(g_pUARTSemaphore);
-				i++;
-				if(10 == i) {
-					i = 0;
-				}
-
         //
         // Wait for the required amount of time.
         //
         vTaskDelayUntil(&ui32WakeTime, 1000 / portTICK_RATE_MS);
     } //forever loop
 }
+
+void ADC_Print(void) {
+	xSemaphoreTake(g_pUARTSemaphore, portMAX_DELAY);
+	UARTprintf("PE3: %d   |   PE2: %d   |    PE1: %d    |   PE0: %d\n", adcRawInput.PE3, adcRawInput.PE2, adcRawInput.PE1, adcRawInput.PE0);
+	xSemaphoreGive(g_pUARTSemaphore);
+}
+
 
 //*****************************************************************************
 //
@@ -140,7 +136,7 @@ uint32_t ADCTaskInit(void(*pTask)(AdcData_t pDataStruct))
     // Print the current loggling LED and frequency.
     UARTprintf("ADC Init\n");
 
-	ProducerTask = pTask;
+		ProducerTask = pTask;
 	
     // Create a queue for sending messages to the LED task.
     //g_pLEDQueue = xQueueCreate(ADC_QUEUE_SIZE, ADC_ITEM_SIZE);

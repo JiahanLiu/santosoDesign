@@ -34,6 +34,7 @@
 #define PRIORITY_ADC_TASK       1
 #define PRIORITY_SWITCH_TASK    5
 #define PRIORITY_LED_TASK       4
+#define PRIORITY_INTERPRETER_TASK       6
 
 
 #endif // __PRIORITIES_H__

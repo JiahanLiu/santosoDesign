@@ -22,23 +22,9 @@
 //
 //*****************************************************************************
 
-#ifndef __ADC_TASK_H__
-#define __ADC_TASK_H__
+#ifndef __INTERPRETER_H__
+#define __INTERPRETER_H__
 
-struct AdcData{
-	uint32_t PE0;
-	uint32_t PE1;
-	uint32_t PE2;
-	uint32_t PE3;
-};
-typedef struct AdcData AdcData_t;
+uint32_t InterpreterTaskInit(void);
 
-//*****************************************************************************
-//
-// Prototypes for the LED task.
-//
-//*****************************************************************************
-uint32_t ADCTaskInit(void(*pTask)(AdcData_t pDataStruct));
-void ADC_Print(void);
-
-#endif // __LED_TASK_H__
+#endif // __INTERPRETER_H__

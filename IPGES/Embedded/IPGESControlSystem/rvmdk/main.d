@@ -24,3 +24,4 @@
 .\rvmdk\main.o: ..\third_party\FreeRTOS\Source\include\semphr.h
 .\rvmdk\main.o: adc_task.h
 .\rvmdk\main.o: pwm_task.h
+.\rvmdk\main.o: interpreter.h
